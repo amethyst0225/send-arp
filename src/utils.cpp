@@ -1,13 +1,4 @@
-#include <sys/ioctl.h>
-#include <net/if.h>
-#include <unistd.h>
-#include <cstring>
-#include <cstdio>
-#include "ip.h"
-#include "mac.h"
-#include <pcap.h>
-#include "ethhdr.h"
-#include "arphdr.h"
+#include "utils.h"
 
 // Define EthArpPacket structure
 #pragma pack(push, 1)

@@ -1,5 +1,3 @@
-#include "ethhdr.h"
-#include "arphdr.h"
 #include "utils.h"
 
 #pragma pack(push, 1)
