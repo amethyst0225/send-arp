@@ -32,7 +32,10 @@ int main(int argc, char* argv[]) {
 		Mac attackerMac;
 		
 		getHostInfo(interfaceName, &attackerIp, &attackerMac);
-
+		printf("[+] attackerIp  : %s\n", std::string(attackerIp).c_str());
+		printf("[+] attackerMac : %s\n", std::string(attackerMac).c_str());
+		printf("\n----------------------------------------\n");
+		
 		// Open pcap handle
 		char errbuf[PCAP_ERRBUF_SIZE];
 		pcap_t *pcap = pcap_open_live(dev, BUFSIZ, 1, 1, errbuf);
@@ -46,6 +49,7 @@ int main(int argc, char* argv[]) {
 		printf("\n----------------------------------------\n");
 
 		Ip senderIp = Ip(argv[i]);
+
 		Mac senderMac = getMac(pcap, attackerIp, attackerMac, senderIp);
 		printf("[+] senderIp    : %s\n", std::string(senderIp).c_str());
 		printf("[+] senderMac   : %s\n", std::string(senderMac).c_str());

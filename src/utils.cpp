@@ -59,7 +59,7 @@ Mac getMac(pcap_t* pcap, Ip attackerIp, Mac attackerMac, Ip targetIp) {
         fprintf(stderr, "pcap_sendpacket failed: %s\n", pcap_geterr(pcap));
         exit(EXIT_FAILURE);
     }
-
+ 
     while (true) {
         struct pcap_pkthdr* header;
         const u_char* packet;
@@ -71,9 +71,10 @@ Mac getMac(pcap_t* pcap, Ip attackerIp, Mac attackerMac, Ip targetIp) {
         }
 
         auto* eth = (EthHdr*)packet;
+     
         if (eth->type_ == htons(EthHdr::Arp)) {
             auto* arp = (ArpHdr*)(packet + sizeof(EthHdr));
-            if (arp->op_ == htons(ArpHdr::Reply) && uint32_t(arp->sip_) == uint32_t(targetIp)) {
+            if (arp->op() == ArpHdr::Reply && arp->sip() == targetIp) {
                 return Mac(arp->smac_);
             }
         }
